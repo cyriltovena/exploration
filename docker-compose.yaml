@@ -69,7 +69,7 @@ services:
       namespace: tns
     logging: *default-logging
   grafana:
-    image: grafana/grafana-dev:11.1.0-173136
+    image: grafana/grafana-dev:11.1.0-173403
     environment:
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_ANONYMOUS_ENABLED=true

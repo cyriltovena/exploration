@@ -4,7 +4,7 @@ x-logging: &default-logging
   driver: loki
   options:
     loki-url: "http://localhost:3100/api/prom/push"
-    labels: namespace
+    labels: namespace,service_name
     mode: non-blocking
     loki-retries: "1"
     loki-max-backoff: "800ms"
@@ -37,6 +37,7 @@ services:
       JAEGER_SAMPLER_PARAM: 1
     labels:
       namespace: tns
+      service_name: app
     logging: *default-logging
   loadgen:
     image: grafana/tns-loadgen:842bd3b
@@ -54,6 +55,7 @@ services:
       JAEGER_SAMPLER_PARAM: 1
     labels:
       namespace: tns
+      service_name: loadgen
     logging: *default-logging
   db:
     image: grafana/tns-db:842bd3b
@@ -68,6 +70,7 @@ services:
       JAEGER_SAMPLER_PARAM: 1
     labels:
       namespace: tns
+      service_name: db
     logging: *default-logging
   grafana:
     image: grafana/grafana-dev:11.1.0-173403
@@ -85,6 +88,7 @@ services:
       - "host.docker.internal:host-gateway"
     labels:
       namespace: monitoring
+      service_name: grafana
     logging: *default-logging
   loki:
     image: grafana/loki:main-e9b6ce9
@@ -99,6 +103,7 @@ services:
     restart: on-failure
     labels:
       namespace: monitoring
+      service_name: loki
     logging: *default-logging
   prometheus:
     image: prom/prometheus:latest
@@ -119,6 +124,7 @@ services:
       - 9090
     labels:
       namespace: monitoring
+      service_name: prometheus
     logging: *default-logging
   tempo:
     image: grafana/tempo:latest
@@ -134,6 +140,7 @@ services:
       - "9411:9411" # zipkin
     labels:
       namespace: monitoring
+      service_name: tempo
     logging: *default-logging
   # generator:
   #   build:

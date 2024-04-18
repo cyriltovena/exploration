@@ -5,6 +5,8 @@ x-logging: &default-logging
   options:
     loki-url: "http://localhost:3100/api/prom/push"
     labels: namespace
+    mode: non-blocking
+    loki-retries: "0"
     loki-relabel-config: |
       - action: replace
         source_labels: ["namespace","compose_service"]

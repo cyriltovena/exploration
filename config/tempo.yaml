@@ -54,4 +54,4 @@ storage:
 overrides:
   defaults:
     metrics_generator:
-      processors: [service-graphs, span-metrics] # enables metrics generator
+      processors: [local-blocks, service-graphs, span-metrics]
